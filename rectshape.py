@@ -6,3 +6,18 @@ class RectShape(pygame.sprite.Sprite):
             super().__init__(self.containers)
         else:
             super().__init__()
+
+        self.width = width
+        self.length = length
+        self.position = pygame.Vector2(x, y)
+        self.velocity = pygame.Vector2(0, 0)
+
+    
+    def draw(self, screen):
+        pass 
+
+    def update(dt):
+        pass
+
+
+    
