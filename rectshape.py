@@ -10,14 +10,20 @@ class RectShape(pygame.sprite.Sprite):
         self.width = width
         self.length = length
         self.position = pygame.Vector2(x, y)
+        self.rect = pygame.Rect(self.position.x, self.position.y, self.width, self.length)
         self.velocity = pygame.Vector2(0, 0)
 
     
     def draw(self, screen):
         pass 
 
-    def update(dt):
+    def update(self, dt):
         pass
+
+    def check_collision(self, other_object):
+        return self.rect.colliderect(other_object.rect)
+
+     
 
 
     

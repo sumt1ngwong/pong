@@ -1,4 +1,5 @@
 import pygame
+import sys
 from player import *
 from ball import *
 from constants import *
@@ -33,6 +34,10 @@ def main():
         screen.fill("black")
 
         updatable.update(dt)
+
+        if ball.check_collision(player_1) or ball.check_collision(player_2):
+            print("a")
+            ball.rebound(dt)
 
         for object in drawable:
             object.draw(screen)
