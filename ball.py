@@ -1,11 +1,12 @@
 from rectshape import * 
 from constants import *
+import sys
 
 class Ball(RectShape):
     def __init__(self, x, y, width, length):
         super().__init__(x, y, width, length)
         self.rect = pygame.Rect(self.position.x, self.position.y, self.width, self.length)
-        self.velocity = pygame.Vector2(500, 600)
+        self.velocity = pygame.Vector2(700, 0)
 
     def ball(self):
         #self.rect = pygame.Rect(self.position.x, self.position.y, self.width, self.length)
@@ -21,15 +22,14 @@ class Ball(RectShape):
             self.velocity.y *= -1
         self.rect.topleft = self.position
 
-
     def rebound(self, dt):
         self.velocity.x *= -1
         self.position += self.velocity * dt 
         self.rect.topleft = self.position
 
-        
-
-
-
+    def reset_ball(self):
+        self.position = pygame.Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        self.velocity = pygame.Vector2(700, 0)  # You could randomize this later
+        self.rect.topleft = self.position
 
 

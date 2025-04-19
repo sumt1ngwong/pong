@@ -7,8 +7,12 @@ from constants import *
 def main():
     print("Starting Pong")
     pygame.init()
+    pygame.font.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
+    player_1_score = 0
+    player_2_score = 0
+    streak = 0
     running = True
     dt = 0
 
@@ -36,8 +40,26 @@ def main():
         updatable.update(dt)
 
         if ball.check_collision(player_1) or ball.check_collision(player_2):
-            print("a")
+            print("collide")
             ball.rebound(dt)
+            streak += 1
+        
+        if ball.position.x >= SCREEN_WIDTH:
+            player_1_score += 1 
+            ball.reset_ball()
+            pygame.time.delay(1000)
+        if ball.position.x + ball.width <= 0:
+            player_2_score += 1 
+            ball.reset_ball()
+            pygame.time.delay(1000)
+
+        font = pygame.font.Font(None, 36)
+        score_text_player_1 = font.render(f'Score P1: {player_1_score}', True, (255, 255, 255))
+        score_text_player_2 = font.render(f'Score P2: {player_2_score}', True, (255, 255, 255))
+        streak_text = font.render(f'Streak: {streak}', True, (255, 255, 255))
+        screen.blit(score_text_player_1, (10, 10))
+        screen.blit(score_text_player_2, (1135, 10))
+        screen.blit(streak_text, (580, 10))
 
         for object in drawable:
             object.draw(screen)
