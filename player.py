@@ -21,10 +21,10 @@ class Player(RectShape):
     def update(self, dt):
         keys = pygame.key.get_pressed()
 
-        if keys[self.up_key]:
+        if keys[self.up_key] and self.position.y > 0:
             self.move(-dt)
 
-        if keys[self.down_key]:
+        if keys[self.down_key] and self.position.y < SCREEN_HEIGHT - self.length :
             self.move(dt)
     
     def move(self, dt):

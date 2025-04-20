@@ -79,3 +79,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+#creative angles
+#boundries for player 
+#ball should go to loser

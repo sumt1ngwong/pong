@@ -6,7 +6,7 @@ class Ball(RectShape):
     def __init__(self, x, y, width, length):
         super().__init__(x, y, width, length)
         self.rect = pygame.Rect(self.position.x, self.position.y, self.width, self.length)
-        self.velocity = pygame.Vector2(700, 500)
+        self.velocity = pygame.Vector2(700, 000)
         self.direction = [0, 1]
         self.angle = [0, 1, 2]
 
@@ -26,12 +26,13 @@ class Ball(RectShape):
 
     def rebound(self, dt):
         self.velocity.x *= -1
+        self.velocity.y = 500
         self.position += self.velocity * dt 
         self.rect.topleft = self.position
 
     def reset_ball(self):
         self.position = pygame.Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-        self.velocity = pygame.Vector2(700, 500)  # You could randomize this later
+        self.velocity = pygame.Vector2(700, 000) 
         self.rect.topleft = self.position
 
 
