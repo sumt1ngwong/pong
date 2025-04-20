@@ -18,6 +18,7 @@ def main():
     running = True
     dt = 0
     angles = [-3, -2, 0, 1, 2, 3]
+    winner = None
 
     drawable = pygame.sprite.Group()
     updatable = pygame.sprite.Group()
@@ -56,6 +57,16 @@ def main():
             streak = 0
             ball.reset_ball()
             pygame.time.delay(1000)
+
+            #Player 1 wins game
+            if player_1_score == 3:
+                winner = "Player 1"
+                show_winning_screen(screen, winner)
+                player_1_score = 0
+                player_2_score = 0
+                streak = 0
+           
+
         #Player_2 wins round
         if ball.position.x + ball.width <= 0:
             player_2_score += 1 
@@ -63,6 +74,15 @@ def main():
             ball.reset_ball()
             ball.velocity.x *= -1
             pygame.time.delay(1000)
+
+            #Player 2 wins game
+            if player_2_score == 3:
+                winner = "Player 2"
+                show_winning_screen(screen, winner, streak)
+                player_1_score = 0
+                player_2_score = 0
+                streak = 0
+         
 
         font = pygame.font.Font(None, 36)
         score_text_player_1 = font.render(f'Score P1: {player_1_score}', True, (255, 255, 255))
@@ -79,7 +99,25 @@ def main():
         clock.tick(60)
         dt = clock.tick(60) / 1000
 
+def show_winning_screen(screen, winner):
+    font = pygame.font.Font(None, 72)
+    message = font.render(f"{winner} Wins! Press 'Space' to play again!", True, (255, 255, 255))
+    screen.fill("black")
+    screen.blit(message, (SCREEN_WIDTH // 2 - message.get_width() // 2, SCREEN_HEIGHT // 2))
+    pygame.display.flip()
 
+    waiting = True
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                waiting = False
+
+        
+    
+    pygame.time.delay(9000)  # or wait for user input
 
 if __name__ == "__main__":
     main()
