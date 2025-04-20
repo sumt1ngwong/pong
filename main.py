@@ -50,16 +50,19 @@ def main():
         if streak - last_streak_checkpoint >= 2:
             last_streak_checkpoint += 2
             ball.velocity += pygame.Vector2(50, 50)
-            
+
+        #PLayer_1 wins round  
         if ball.position.x >= SCREEN_WIDTH:
             player_1_score += 1 
             streak = 0
             ball.reset_ball()
             pygame.time.delay(1000)
+        #Player_2 wins round
         if ball.position.x + ball.width <= 0:
             player_2_score += 1 
             streak = 0 
             ball.reset_ball()
+            ball.velocity.x *= -1
             pygame.time.delay(1000)
 
         font = pygame.font.Font(None, 36)
@@ -81,5 +84,3 @@ if __name__ == "__main__":
     main()
 
 #creative angles
-#boundries for player 
-#ball should go to loser
