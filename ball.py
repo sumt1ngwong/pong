@@ -9,7 +9,6 @@ class Ball(RectShape):
         self.rect = pygame.Rect(self.position.x, self.position.y, self.width, self.length)
         self.velocity = pygame.Vector2(700, 000)
       
-
     def ball(self):
         return self.rect
 
@@ -25,10 +24,8 @@ class Ball(RectShape):
 
     def rebound(self, dt, angles):
         self.velocity.x *= -1
-
-        angle = random.choice(angles)
-
-        self.velocity.y = 200 * angle
+        self.angle = random.choice(angles)
+        self.velocity.y = 200 * self.angle
         self.position += self.velocity * dt 
         self.rect.topleft = self.position
 

@@ -12,7 +12,6 @@ class Player(RectShape):
         self.rect = pygame.Rect(self.position.x, self.position.y, self.width, self.length)
 
     def paddle(self):
-        #self.rect =  pygame.Rect(self.position.x, self.position.y, self.width, self.length)
         return self.rect
 
     def draw(self, screen):
