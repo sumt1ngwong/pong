@@ -1,4 +1,5 @@
 import pygame
+import random
 import sys
 from player import *
 from ball import *
@@ -13,9 +14,10 @@ def main():
     player_1_score = 0
     player_2_score = 0
     streak = 0
+    last_streak_checkpoint = 0
     running = True
     dt = 0
-
+    
     
     drawable = pygame.sprite.Group()
     updatable = pygame.sprite.Group()
@@ -44,12 +46,19 @@ def main():
             ball.rebound(dt)
             streak += 1
         
+        #Logic to make the game harder as streak increases
+        if streak - last_streak_checkpoint >= 2:
+            last_streak_checkpoint += 2
+            ball.velocity += pygame.Vector2(50, 50)
+            
         if ball.position.x >= SCREEN_WIDTH:
             player_1_score += 1 
+            streak = 0
             ball.reset_ball()
             pygame.time.delay(1000)
         if ball.position.x + ball.width <= 0:
             player_2_score += 1 
+            streak = 0 
             ball.reset_ball()
             pygame.time.delay(1000)
 
@@ -67,10 +76,6 @@ def main():
         pygame.display.flip()
         clock.tick(60)
         dt = clock.tick(60) / 1000
-
-
-        
-        
 
 if __name__ == "__main__":
     main()
