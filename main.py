@@ -17,8 +17,8 @@ def main():
     last_streak_checkpoint = 0
     running = True
     dt = 0
-    
-    
+    angles = [-3, -2, 0, 1, 2, 3]
+
     drawable = pygame.sprite.Group()
     updatable = pygame.sprite.Group()
 
@@ -42,8 +42,7 @@ def main():
         updatable.update(dt)
 
         if ball.check_collision(player_1) or ball.check_collision(player_2):
-            print("collide")
-            ball.rebound(dt)
+            ball.rebound(dt, angles)
             streak += 1
         
         #Logic to make the game harder as streak increases
@@ -79,6 +78,8 @@ def main():
         pygame.display.flip()
         clock.tick(60)
         dt = clock.tick(60) / 1000
+
+
 
 if __name__ == "__main__":
     main()
